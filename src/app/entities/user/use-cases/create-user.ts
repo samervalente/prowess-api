@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { ConflictException, Injectable } from "@nestjs/common";
 import { User } from "../user";
 import { UserRepository } from "../user-repository";
 import { CreateUserDTO } from "src/infra/http/dtos/create-user-dto";
@@ -13,6 +13,12 @@ export class CreateUser {
 
     async handle(request: CreateUserDTO): Promise<User> {
         const {first_name, surname, email, password, birthDate} = request
+
+        const userOnDB = await this.userRepository.findByEmail(email)
+        if(userOnDB){
+            throw new ConflictException("User already registered with this email.")
+        }
+
         const name = first_name.concat(` ${surname}`)
         const parsedBirthDate = new Date(birthDate)
 

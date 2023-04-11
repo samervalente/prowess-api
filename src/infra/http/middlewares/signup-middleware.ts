@@ -7,7 +7,6 @@ import { validate } from 'class-validator';
 export class SignUpMiddleware implements NestMiddleware {
   async use(req: Request, res: Response, next: NextFunction) {
     const { first_name, surname, email, password, birthDate } = req.body
-    console.log(req.body)
     const user = new CreateUserDTO()
     user.first_name = first_name
     user.surname = surname
