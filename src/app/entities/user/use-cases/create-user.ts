@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { User } from "../user";
 import { UserRepository } from "../user-repository";
 import { CreateUserDTO } from "src/infra/http/dtos/create-user-dto";
+import { parse } from "path";
 
 
 @Injectable()
@@ -15,7 +16,9 @@ export class CreateUser {
     async handle(request: CreateUserDTO): Promise<User> {
         const {first_name, surname, email, password, birthDate} = request
         const name = first_name + surname
-        const user = new User({name, email, password, birthDate});
+        const parsedBirthDate = new Date(birthDate)
+
+        const user = new User({name, email, password, birthDate: parsedBirthDate});
         
         const createdUser = await this.userRepository.create(user)
         return createdUser
