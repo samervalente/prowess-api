@@ -5,8 +5,8 @@ export interface UserProps {
   name: string;
   email: string;
   password: string;
-  birthDate: string;
-  createdAt: string | Date;
+  birthDate: string | Date;
+  createdAt: Date;
 }
 
 export class User {
@@ -46,11 +46,11 @@ export class User {
     this.props.password = password;
   }
 
-  public get birthDate(): string {
+  public get birthDate(): string | Date {
     return this.props.birthDate;
   }
 
-  public set birthDate(birthDate: string) {
+  public set birthDate(birthDate: string | Date) {
     this.props.birthDate = birthDate;
   }
 
