@@ -1,52 +1,60 @@
+import { randomUUID } from "crypto";
+import { Replace } from "src/helpers/Replace";
+
 export interface UserProps {
-  id: string;
   name: string;
   email: string;
   password: string;
   birthDate: string;
-  createdAt: string;
+  createdAt: string | Date;
 }
 
 export class User {
+  private _id: string;
   private props: UserProps;
 
-  constructor(props: UserProps) {
-    this.props = { ...props };
+  constructor(props: Replace<UserProps, {createdAt?: Date}>, id?: string) {
+    this._id = id ?? randomUUID();
+    this.props = { ...props, createdAt: props.createdAt ?? new Date() };
   }
 
-  getName(): string {
+  public get id(): string{
+    return this._id
+  }
+
+  public get name(): string {
     return this.props.name;
   }
 
-  setName(name: string): void {
+  public set name(name: string) {
     this.props.name = name;
   }
 
-  getEmail(): string {
+  public get email(): string {
     return this.props.email;
   }
 
-  setEmail(email: string): void {
+  public set email(email: string) {
     this.props.email = email;
   }
 
-  getPassword(): string {
+  public get password(): string {
     return this.props.password;
   }
 
-  setPassword(password: string): void {
+  public set password(password: string) {
     this.props.password = password;
   }
 
-  getBirthDate(): string {
+  public get birthDate(): string {
     return this.props.birthDate;
   }
 
-  setBirthDate(birthDate: string): void {
+  public set birthDate(birthDate: string) {
     this.props.birthDate = birthDate;
   }
 
-  getCreatedAt(): string {
+  public get createdAt(): string | Date {
     return this.props.createdAt;
   }
 }
