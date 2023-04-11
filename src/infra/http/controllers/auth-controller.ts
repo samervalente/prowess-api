@@ -1,7 +1,7 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Controller, HttpStatus, Post, Res } from "@nestjs/common";
 import { CreateUser } from "src/app/entities/user/use-cases/create-user";
-import { CreateUserDTO } from "../dtos/create-user-dto";
 import { UserViewModel } from "../view-models/user-view-model";
+import { Response } from "express";
 
 
 @Controller("auth")
@@ -10,17 +10,13 @@ export class UserController{
         private createUser: CreateUser
     ){}
 
-    @Post("sign-up")
-    async create(@Body() requestBody: CreateUserDTO){
-        const {first_name, surname, email, password, birthDate} = requestBody
-        const user = await this.createUser.handle({
-            first_name,
-            surname,
-            email, 
-            password,
-            birthDate
-        })
+    @Post("signup")
+    async create(@Res() res: Response){
+        const user = await this.createUser.handle(res.locals.user)
 
-        return {user: UserViewModel.toHTTP(user)}
+        res.status(HttpStatus.CREATED).send({
+            response: "User registered successfully.",
+            user: UserViewModel.toHTTP(user)
+        })
     }
 }
