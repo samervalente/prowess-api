@@ -2,11 +2,6 @@ import { IsNotEmpty, IsUUID } from "class-validator";
 
 
 export class CreatePostDTO {
-
-    @IsUUID()
-    @IsNotEmpty()
-    authorId: string
-
     @IsNotEmpty()
     partners: string
 
