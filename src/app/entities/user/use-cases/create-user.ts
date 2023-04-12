@@ -13,7 +13,7 @@ export class CreateUser {
         this.encrypter = encrypter;
     }
 
-    async handle(request: CreateUserDTO): Promise<User> {
+    async execute(request: CreateUserDTO): Promise<User> {
         const {first_name, surname, email, password, birthDate} = request
 
         const userOnDB = await this.userRepository.findByEmail(email)

@@ -14,4 +14,8 @@ export class BcryptAdapter implements Encrypter{
 
         return hashedValue;
     }
+
+    async compare(value: string, hashValue: string): Promise<boolean>{
+        return await bcrypt.compare(value, hashValue)
+    }
 }

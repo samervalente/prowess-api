@@ -11,4 +11,5 @@ export class UserViewModel {
             createdAt: user.createdAt,
         }
     }
+
 }
