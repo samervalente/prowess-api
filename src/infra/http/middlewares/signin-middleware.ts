@@ -26,7 +26,6 @@ export class SignInMiddleware implements NestMiddleware {
       })
     }
 
-    console.log("chegou aqui", user)
     res.locals.requestBody = user;
 
     next();

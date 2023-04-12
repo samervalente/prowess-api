@@ -35,7 +35,6 @@ export class SignInUser{
         }
 
         const secret_key = process.env.JWT_SECRET
-        console.log(secret_key)
         const token = jwt.sign({userId: user.id}, secret_key)
         return {name: user.name, email: user.email, token}
 
