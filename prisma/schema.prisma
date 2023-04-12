@@ -42,5 +42,9 @@ model Post {
   contribution Float?
   sharedCosts String?
   about String
+  city String
+  state String
   createdAt DateTime @default(now())
+
+  @@map("posts")
 }

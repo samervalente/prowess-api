@@ -6,6 +6,8 @@ export interface PostProps {
     contribution?: number
     sharedCosts?: string
     about: string
+    city: string;
+    state: string;
     createdAt: Date
 }
 
@@ -58,6 +60,22 @@ export class Post {
 
     public set about(about: string) {
         this.about = about
+    }
+
+    public get city(): string {
+        return this.city
+    }
+
+    public set city(city: string) {
+        this.city = city
+    }
+
+    public get state(): string {
+        return this.state
+    }
+
+    public set state(state: string) {
+        this.city = state
     }
 
     public get createdAt(): string {
