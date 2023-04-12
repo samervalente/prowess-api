@@ -18,6 +18,18 @@ export class CreateUserDTO {
   password: string;
 
   @IsNotEmpty()
+  @IsString()
+  gender: string;
+
+  @IsNotEmpty()
+  @IsString()
+  imageUrl?: string;
+
+  @IsNotEmpty()
+  @IsString()
+  phone: string;
+
+  @IsNotEmpty()
   @Matches(/^(0?[1-9]|[12][0-9]|3[01])[./](0?[1-9]|1[012])[./]\d{4}$/, {message: 'birthDate must be a valid date string in the format DD/MM/YYYY'})
   birthDate: string;
 }

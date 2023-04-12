@@ -27,59 +27,59 @@ export class Post {
     }
 
     public get authorId(): string {
-        return this.authorId
+        return this.props.authorId
     }
 
     public get partners(): string {
-        return this.authorId
+        return this.props.authorId
     }
 
     public set partners(partners: string) {
-        this.partners = partners
+        this.props.partners = partners
     }
 
     public get constribution(): number {
-        return this.constribution
+        return this.props.contribution
     }
 
-    public set constribution(constribution: number) {
-        this.constribution = constribution
+    public set constribution(contribution: number) {
+        this.props.contribution = contribution
     }
 
     public get sharedCosts(): string {
-        return this.authorId
+        return this.props.authorId
     }
 
     public set sharedCosts(sharedCosts: string) {
-        this.sharedCosts = sharedCosts
+        this.props.sharedCosts = sharedCosts
     }
 
     public get about(): string {
-        return this.authorId
+        return this.props.authorId
     }
 
     public set about(about: string) {
-        this.about = about
+        this.props.about = about
     }
 
     public get city(): string {
-        return this.city
+        return this.props.city
     }
 
     public set city(city: string) {
-        this.city = city
+        this.props.city = city
     }
 
     public get state(): string {
-        return this.state
+        return this.props.state
     }
 
     public set state(state: string) {
-        this.city = state
+        this.props.city = state
     }
 
     public get createdAt(): string {
-        return this.authorId
+        return this.props.authorId
     }
 
 }

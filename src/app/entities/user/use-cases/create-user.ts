@@ -14,7 +14,7 @@ export class CreateUser {
     }
 
     async execute(request: CreateUserDTO): Promise<User> {
-        const {first_name, surname, email, password, birthDate} = request
+        const {first_name, surname, email, password, birthDate, gender, imageUrl, phone} = request
 
         const userOnDB = await this.userRepository.findByEmail(email)
         if(userOnDB){
@@ -24,9 +24,8 @@ export class CreateUser {
         const hashPassword = await this.encrypter.encrypt(password);
         const name = first_name.concat(` ${surname}`)
         const parsedBirthDate = new Date(birthDate)
-        
 
-        const user = new User({name, email, password: hashPassword, birthDate: parsedBirthDate});
+        const user = new User({name, email, password: hashPassword, gender, imageUrl, phone, birthDate: parsedBirthDate});
         
         const createdUser = await this.userRepository.create(user)
         return createdUser
