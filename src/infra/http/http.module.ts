@@ -3,13 +3,19 @@ import { DatabaseModule } from "../database/database.module";
 import { UserController } from "./controllers/auth-controller";
 import { CreateUser } from "src/app/entities/user/use-cases/create-user";
 import { SignUpMiddleware } from "./middlewares/signup-middleware";
-
+import { BcryptAdapter } from "../encryptography/bcrypt-adapter";
 
 @Module({
     imports: [DatabaseModule],
     controllers: [UserController],
     providers: [
-        CreateUser
+        CreateUser,
+        {
+            provide: 'Encrypter',
+            useFactory: () => {
+                return new BcryptAdapter(12);
+            },
+        }
     ]
 })
 

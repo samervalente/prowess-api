@@ -10,7 +10,8 @@ import { PrismaService } from "./prisma/prisma.service";
         {
         provide: UserRepository,
         useClass: PrismaUserRepository
-        }
+        },
+        
     ],
     exports: [UserRepository]
 })
