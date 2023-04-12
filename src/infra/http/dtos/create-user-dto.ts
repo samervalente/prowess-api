@@ -1,4 +1,5 @@
-import { IsString, IsNotEmpty, IsEmail, MinLength, Matches, IsDateString } from 'class-validator';
+import { Gender } from '@prisma/client';
+import { IsString, IsNotEmpty, IsEmail, MinLength, Matches, IsEnum, IsOptional, } from 'class-validator';
 
 export class CreateUserDTO {
   @IsNotEmpty()
@@ -19,14 +20,15 @@ export class CreateUserDTO {
 
   @IsNotEmpty()
   @IsString()
-  gender: string;
+  @IsEnum(Gender)
+  gender: Gender;
 
-  @IsNotEmpty()
-  @IsString()
+  @IsOptional()
   imageUrl?: string;
 
   @IsNotEmpty()
   @IsString()
+  @Matches(/^\d{2}\s*(?:\d{4,5}\s*)?(?:\d{4}\s*)?$/, {message: 'invalid phone number'})
   phone: string;
 
   @IsNotEmpty()

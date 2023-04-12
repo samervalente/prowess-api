@@ -27,7 +27,7 @@ model User {
   birthDate DateTime
   gender    Gender
   imageUrl  String?
-  phone     String?   @unique
+  phone     String   @unique
   createdAt DateTime @default(now())
   Post      Post[]
 

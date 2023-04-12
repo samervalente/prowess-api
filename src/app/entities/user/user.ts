@@ -1,3 +1,4 @@
+import { Gender } from "@prisma/client";
 import { randomUUID } from "crypto";
 import { Replace } from "src/helpers/Replace";
 
@@ -5,11 +6,11 @@ export interface UserProps {
   name: string;
   email: string;
   password: string;
-  gender: string;
+  gender: Gender;
   imageUrl?: string;
   phone: string;
   birthDate: Date;
-  createdAt: Date;
+  createdAt?: Date;
 }
 
 export class User {
@@ -18,7 +19,7 @@ export class User {
 
   constructor(props: Replace<UserProps, {createdAt?: Date}>, id?: string) {
     this._id = id ?? randomUUID();
-    this.props = { ...props, createdAt: props.createdAt ?? new Date() };
+    this.props = props
   }
 
   public get id(): string{
@@ -50,11 +51,11 @@ export class User {
   }
 
 
-  public get gender(): string {
+  public get gender(): Gender {
     return this.props.gender;
   }
 
-  public set gender(gender: string) {
+  public set gender(gender: Gender) {
     this.props.gender = gender;
   }
 
@@ -63,7 +64,7 @@ export class User {
   }
 
   public set imageUrl(imageUrl: string) {
-    this.props.gender = imageUrl;
+    this.props.imageUrl = imageUrl;
   }
 
   public get phone(): string {
@@ -71,7 +72,7 @@ export class User {
   }
 
   public set phone(phone: string) {
-    this.props.gender = phone;
+    this.props.phone = phone;
   }
 
 
