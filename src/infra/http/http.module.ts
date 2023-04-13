@@ -11,6 +11,7 @@ import { CreatePostMiddleware } from "./middlewares/create-post-middleware";
 import { PostController } from "./controllers/post-controller";
 import { CreatePost } from "src/app/entities/use-cases/create-post";
 import { GetPostsByAuthor } from "src/app/entities/use-cases/get-by-author";
+import { FilterPosts } from "src/app/entities/use-cases/filter-posts";
 
 @Module({
     imports: [DatabaseModule],
@@ -20,6 +21,7 @@ import { GetPostsByAuthor } from "src/app/entities/use-cases/get-by-author";
         SignInUser,
         CreatePost,
         GetPostsByAuthor,
+        FilterPosts,
         {
             provide: 'Encrypter',
             useFactory: () => {
@@ -33,7 +35,7 @@ export class HttpModule implements NestModule {
     configure(consumer: MiddlewareConsumer) {
         consumer.apply(SignUpMiddleware).forRoutes({path: 'auth/signup', method: RequestMethod.POST}),
         consumer.apply(SignInMiddleware).forRoutes({path: 'auth/signin', method: RequestMethod.POST}),
-        consumer.apply(TokenValidatorMiddleware).forRoutes(PostController)
+        consumer.apply(TokenValidatorMiddleware).exclude({path: '/posts', method: RequestMethod.GET}).forRoutes(PostController)
         consumer.apply(CreatePostMiddleware).forRoutes({path: '/posts', method: RequestMethod.POST})
     }
 }

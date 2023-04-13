@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { Post } from "src/app/entities/post/post";
-import { PostRepository } from "src/app/entities/post/post-repository";
+import { FilterRequestParams, PostRepository } from "src/app/entities/post/post-repository";
 import { PrismaService } from "../prisma.service";
 import { PrismaPostMapper } from "../mappers/prisma-post-mapper";
 
@@ -23,4 +23,11 @@ export class PrismaPostRepository implements PostRepository {
         return posts.map(post => PrismaPostMapper.toDomain(post))
     }
     
+    async filterPosts(params: FilterRequestParams): Promise<Post[]> {
+        const {state, city, skip, take} = params
+        const posts = await this.prisma.post.findMany({where: {AND: [{state}, {city}]}, orderBy: {createdAt: 'desc'}, skip, take })
+
+         return posts.map(post => PrismaPostMapper.toDomain(post))
+    }
+
 }

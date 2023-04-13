@@ -1,14 +1,15 @@
-import { Controller, Get, HttpStatus, Post, Res } from "@nestjs/common";
+import { Controller, Get, HttpStatus, Post, Query, Res } from "@nestjs/common";
 import { Response } from "express";
 import { CreatePost } from "src/app/entities/use-cases/create-post";
 import { PostViewModel } from "../view-models/post-view-model";
 import { GetPostsByAuthor } from "src/app/entities/use-cases/get-by-author";
+import { FilterPosts } from "src/app/entities/use-cases/filter-posts";
 
 
 @Controller("/posts")
 export class PostController {
     
-    constructor(private createPost: CreatePost, private getPostsByAuthor: GetPostsByAuthor){}
+    constructor(private createPost: CreatePost, private getPostsByAuthor: GetPostsByAuthor, private filterPosts: FilterPosts){}
 
     @Post()
     async create(@Res() res: Response){
@@ -27,5 +28,12 @@ export class PostController {
         res.status(HttpStatus.OK).send({
             posts: posts.map(post => PostViewModel.toHTTP(post))
         })
+    }
+
+    @Get()
+    async getPosts(@Query("state") state: string, @Query("city") city: string, @Query("skip") skip = 0, take=6, @Res() res: Response){
+        const posts = await this.filterPosts.execute({state, city, skip: Number(skip), take: Number(take)})
+        
+        res.status(HttpStatus.OK).send({posts: posts.map(post => PostViewModel.toHTTP(post))})
     }
 }
