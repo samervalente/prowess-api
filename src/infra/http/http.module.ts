@@ -23,7 +23,7 @@ import { CreatePost } from "src/app/entities/use-cases/create-post";
             useFactory: () => {
                 return new BcryptAdapter(12);
             },
-        }
+        },
     ]
 })
 

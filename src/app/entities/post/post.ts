@@ -20,7 +20,6 @@ export class Post {
         this.props = props
     }
 
-
     public get id(): string {
         return this._id
     }

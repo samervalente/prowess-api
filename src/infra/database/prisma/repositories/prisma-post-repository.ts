@@ -14,8 +14,8 @@ export class PrismaPostRepository implements PostRepository {
         const createdPost =  await this.prisma.post.create({data: raw})
         return PrismaPostMapper.toDomain(createdPost)
     }
-    countByUser(userId: string): Promise<number> {
-        throw new Error("Method not implemented.");
+    async countByAuthor(authorId: string): Promise<number> {
+        return await this.prisma.post.count({where: {authorId: authorId}})
     }
     
 }
