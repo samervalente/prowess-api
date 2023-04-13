@@ -17,5 +17,10 @@ export class PrismaPostRepository implements PostRepository {
     async countByAuthor(authorId: string): Promise<number> {
         return await this.prisma.post.count({where: {authorId: authorId}})
     }
+
+    async getPostsByAuthor(authorId: string): Promise<Post[]> {
+        const posts =  await this.prisma.post.findMany({where: {authorId: authorId}})
+        return posts.map(post => PrismaPostMapper.toDomain(post))
+    }
     
 }
