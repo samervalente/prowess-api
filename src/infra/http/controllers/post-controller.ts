@@ -1,9 +1,9 @@
 import { Controller, Get, HttpStatus, Post, Query, Res } from "@nestjs/common";
 import { Response } from "express";
-import { CreatePost } from "src/app/entities/use-cases/create-post";
+import { CreatePost } from "src/app/entities/post/use-cases/create-post";
 import { PostViewModel } from "../view-models/post-view-model";
-import { GetPostsByAuthor } from "src/app/entities/use-cases/get-by-author";
-import { FilterPosts } from "src/app/entities/use-cases/filter-posts";
+import { GetPostsByAuthor } from "src/app/entities/post/use-cases/get-by-author";
+import { FilterPosts } from "src/app/entities/post/use-cases/filter-posts";
 
 
 @Controller("/posts")

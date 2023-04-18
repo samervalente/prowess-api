@@ -1,5 +1,6 @@
 import { Gender } from '@prisma/client';
 import { IsString, IsNotEmpty, IsEmail, MinLength, Matches, IsEnum, IsOptional, } from 'class-validator';
+import { Multer } from 'multer';
 
 export class CreateUserDTO {
   @IsNotEmpty()
@@ -24,7 +25,7 @@ export class CreateUserDTO {
   gender: Gender;
 
   @IsOptional()
-  imageUrl?: Blob | MediaSource | string;
+  image?: Express.Multer.File | string;
 
   @IsNotEmpty()
   @IsString()

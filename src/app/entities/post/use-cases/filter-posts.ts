@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { FilterRequestParams, PostRepository } from "../post/post-repository";
+import { FilterRequestParams, PostRepository } from "../post-repository";
 
 
 @Injectable()

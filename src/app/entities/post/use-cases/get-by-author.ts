@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { PostRepository } from "../post/post-repository";
+import { PostRepository } from "../post-repository";
 
 @Injectable()
 export class GetPostsByAuthor{

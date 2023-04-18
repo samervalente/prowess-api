@@ -14,12 +14,13 @@ export class UserController{
     @Post("signup")
     async create(@Res() res: Response){
      
-        const body = {...res.locals.user, imageFilename: res.locals.imageFilename}
-        await this.createUser.execute(body)
+        const body = {...res.locals.user}
+        const user = await this.createUser.execute(body)
     
         res.status(HttpStatus.CREATED).send({
             statusCode:201,
-            response: "User registered successfully"
+            response: "User registered successfully",
+            user
         })
     }
 

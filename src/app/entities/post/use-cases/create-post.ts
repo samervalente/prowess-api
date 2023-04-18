@@ -1,6 +1,6 @@
 import { ForbiddenException, Injectable } from "@nestjs/common";
-import { PostRepository } from "../post/post-repository";
-import { Post } from "../post/post";
+import { PostRepository } from "../post-repository";
+import { Post } from "../post";
 
 
 @Injectable()
