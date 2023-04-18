@@ -19,11 +19,7 @@ export class SignUpMiddleware implements NestMiddleware {
     user.phone = phone
     user.birthDate = birthDate
     user.image = file
-
-
-      
- 
-
+    
     const errors = await validate(user)
     if (errors.length > 0) {
       const allErrors = errors.map((error) => (

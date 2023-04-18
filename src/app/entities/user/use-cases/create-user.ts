@@ -27,9 +27,6 @@ export class CreateUser {
         const userWithEmail = await this.userRepository.findByEmail(email)
         if(userWithEmail)  throw new ConflictException("User already registered with this email.")
 
-        const userWithPhone = await this.userRepository.findByPhone(maskHelper.maskPhone(phone))
-        if(userWithPhone) throw new ConflictException("User already registered with this phone number.")
-
         const hashPassword = await this.encrypter.encrypt(password);
         const name = firstname.concat(` ${surname}`)
         const parsedBirthDate = new Date(birthDate)
