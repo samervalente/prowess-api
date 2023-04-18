@@ -4,9 +4,10 @@ import { UserRepository } from "../user-repository";
 import { CreateUserDTO } from "src/infra/http/dtos/create-user-dto";
 import { Encrypter } from "src/app/protocols/encrypter";
 import { MasksHelper } from "src/helpers/masks";
-import { CloudinaryService } from "src/infra/utils/cloudinary/cloudinary.service";
+import { CloudinaryService } from "../../../../infra/utils/cloudinary/cloudinary.service";
 import * as fs from 'fs'
 import * as path from 'path';
+import { capitalize } from "src/infra/utils/string-utils";
 
 @Injectable()
 export class CreateUser {
@@ -28,7 +29,7 @@ export class CreateUser {
         if(userWithEmail)  throw new ConflictException("User already registered with this email.")
 
         const hashPassword = await this.encrypter.encrypt(password);
-        const name = firstname.concat(` ${surname}`)
+        const name = capitalize(firstname.concat(` ${surname}`))
         const parsedBirthDate = new Date(birthDate)
         const maskedPhone = maskHelper.maskPhone(phone)
 
