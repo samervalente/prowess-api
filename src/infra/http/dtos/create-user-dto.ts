@@ -4,7 +4,7 @@ import { IsString, IsNotEmpty, IsEmail, MinLength, Matches, IsEnum, IsOptional, 
 export class CreateUserDTO {
   @IsNotEmpty()
   @IsString()
-  first_name: string;
+  firstname: string;
 
   @IsNotEmpty()
   @IsString()
@@ -24,11 +24,11 @@ export class CreateUserDTO {
   gender: Gender;
 
   @IsOptional()
-  imageUrl?: string;
+  imageUrl?: Blob | MediaSource | string;
 
   @IsNotEmpty()
   @IsString()
-  @Matches(/^\d{2}\s*(?:\d{4,5}\s*)?(?:\d{4}\s*)?$/, {message: 'invalid phone number'})
+  @Matches(/^(\([1-9]{2}\)|[1-9]{2})\s?([9]{1})?\s?[0-9]{4}\-?[0-9]{4}$/, {message: 'invalid phone number'})
   phone: string;
 
   @IsNotEmpty()

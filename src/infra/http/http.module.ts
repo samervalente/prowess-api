@@ -12,6 +12,8 @@ import { PostController } from "./controllers/post-controller";
 import { CreatePost } from "src/app/entities/use-cases/create-post";
 import { GetPostsByAuthor } from "src/app/entities/use-cases/get-by-author";
 import { FilterPosts } from "src/app/entities/use-cases/filter-posts";
+import { CloudinaryService } from "../utils/cloudinary/cloudinary.service";
+
 
 @Module({
     imports: [DatabaseModule],
@@ -19,6 +21,7 @@ import { FilterPosts } from "src/app/entities/use-cases/filter-posts";
     providers: [
         CreateUser,
         SignInUser,
+        CloudinaryService,
         CreatePost,
         GetPostsByAuthor,
         FilterPosts,
