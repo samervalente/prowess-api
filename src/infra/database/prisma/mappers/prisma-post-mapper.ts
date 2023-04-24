@@ -1,6 +1,7 @@
 
 import { Post as RawPost } from "@prisma/client"
-import { Post } from "src/app/entities/post/post"
+import { Author, Post } from "src/app/entities/post/post"
+
 
 export class PrismaPostMapper {
     static toPrisma(post: Post){
@@ -18,7 +19,7 @@ export class PrismaPostMapper {
     }
 
     static toDomain(raw: RawPost ): Post {
-        return new Post({
+        const post = new Post({
             authorId: raw.authorId,
             partners: raw.partners,
             contribution: raw.contribution,
@@ -28,5 +29,7 @@ export class PrismaPostMapper {
             state: raw.state,
             createdAt: raw.createdAt
         }, raw.id)
+        
+        return post
     }
 }

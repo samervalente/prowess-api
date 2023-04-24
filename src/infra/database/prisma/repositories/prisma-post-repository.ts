@@ -3,6 +3,7 @@ import { Post } from "src/app/entities/post/post";
 import { FilterRequestParams, PostRepository } from "src/app/entities/post/post-repository";
 import { PrismaService } from "../prisma.service";
 import { PrismaPostMapper } from "../mappers/prisma-post-mapper";
+import { PostHttpView } from "src/infra/http/view-models/post-view-model";
 
 
 @Injectable()
@@ -23,11 +24,11 @@ export class PrismaPostRepository implements PostRepository {
         return posts.map(post => PrismaPostMapper.toDomain(post))
     }
     
-    async filterPosts(params: FilterRequestParams): Promise<Post[]> {
+    async filterPosts(params: FilterRequestParams): Promise<PostHttpView[]> {
         const {state, city, skip, take} = params
-        const posts = await this.prisma.post.findMany({where: {AND: [{state}, {city}]}, orderBy: {createdAt: 'desc'}, skip, take })
-
-         return posts.map(post => PrismaPostMapper.toDomain(post))
+  
+        const posts = await this.prisma.post.findMany({ skip,take, where: {AND: [{state}, {city}]}, orderBy: {createdAt: 'desc'}, include:{author:{select:{name: true, birthDate: true, gender: true, imageUrl: true, phone:true}}} })
+         return posts
     }
 
 }

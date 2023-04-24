@@ -1,5 +1,13 @@
 import { randomUUID } from "crypto";
 
+export interface Author {
+    name: string;
+    birthDate: Date;
+    gender:string;
+    imageUrl: string;
+    phone:string;
+}
+
 export interface PostProps {
     authorId: string;
     partners: string
@@ -56,6 +64,7 @@ export class Post {
         return this.props.about
     }
 
+    
     public set about(about: string) {
         this.props.about = about
     }
