@@ -33,7 +33,7 @@ export class PrismaPostRepository implements PostRepository {
   ): Promise<{ posts: PostHttpView[]; count: number }> {
     const { state, city, skip, take, gender } = params;
     const posts = await this.prisma.post.findMany({
-      skip: Number(skip * take),
+      skip,
       take,
       where: { AND: [{ state }, { city }, { author: { gender } }] },
       orderBy: { createdAt: 'desc' },
@@ -50,7 +50,9 @@ export class PrismaPostRepository implements PostRepository {
       },
     });
 
-    const count = await this.prisma.post.count();
+    const count = await this.prisma.post.count({
+      where: { AND: [{ state }, { city }, { author: { gender } }] },
+    });
     return { posts, count };
   }
 }
