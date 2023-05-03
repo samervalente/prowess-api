@@ -1,6 +1,5 @@
 import { Gender } from '@prisma/client';
 import { IsString, IsNotEmpty, IsEmail, MinLength, Matches, IsEnum, IsOptional, } from 'class-validator';
-import { Multer } from 'multer';
 
 export class CreateUserDTO {
   @IsNotEmpty()
